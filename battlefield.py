@@ -24,11 +24,15 @@ class Battlefield:
                 robot.health = robot.health - dinosaur.attack_power
                 print(f'Robot {robot.name} has {robot.health} health remaining!')
                 print(" ")
+                if robot.health <= 0:
+                    break
             if dinosaur.health > 0:
                 robot.attack(dinosaur.name)
                 dinosaur.health = dinosaur.health - robot.active_weapon.attack_power
                 print(f'Dinosaur {dinosaur.name} has {dinosaur.health} health remaining!')
                 print(" ")
+                if dinosaur.health <= 0:
+                    break
             else:
                 self.action = False
 
