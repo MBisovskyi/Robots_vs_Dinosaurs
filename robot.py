@@ -8,7 +8,7 @@ class Robot:
         self.active_weapon = Weapon('Cannon', 30)
     
     def attack(self, dinosaur):
-        print(f'Robot {self.name} attacked Dinosaur {dinosaur} and dealt {self.active_weapon.attack_power} of damage!')
+        print(f'Robot {self.name} attacked Dinosaur {dinosaur} with a {self.active_weapon.name} and dealt {self.active_weapon.attack_power} of damage!')
 
 
         
