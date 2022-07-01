@@ -5,11 +5,14 @@ from weapon import Weapon
 class Battlefield:
     def __init__(self):
         self.battle = True
+        self.dinosaur = None
+        self.robot = None
 
     def run_games(self):
         user_choice = self.game_mode()
         if user_choice == '1':
-            self.robot_dino_names()
+            self.create_robot()
+            self.create_dinosaur()
             self.display_welcome()
             self.battle_phase()
             self.display_winner()
@@ -23,12 +26,8 @@ class Battlefield:
 
     def game_mode(self):
         print("                     GAME MODE:")
-        user_choice = input("1. Robot vs Dinosaur            2. Fleet vs Nerd \n     \nSelect option: ")
+        user_choice = input("1. Robot vs Dinosaur            2. Fleet vs Nerd\nSelect option: ")
         return user_choice  
-
-    def robot_dino_names(self):
-        self.robot = Robot(input("Enter Robot name: "))
-        self.dinosaur = Dinosaur(input("Enter Dino name: "), 25)  
 
     def create_fleet(self):
         self.robot1 = Robot(input("First Robot name: "))
@@ -43,24 +42,23 @@ class Battlefield:
         print(f"\nHerd squad is:\n\n1. Dino {self.dinosaur1.name} - damage: {self.dinosaur1.attack_power}\n2. Dino {self.dinosaur2.name} - damage: {self.dinosaur2.attack_power}\n3. Dino {self.dinosaur3.name} - damage: {self.dinosaur3.attack_power}\n\nThey are huge!\n")
 
     def display_welcome(self):
-        print(" ")
-        print(f"                    BATTLE\n         Robot: {self.robot.name.upper()}  vs  Dino: {self.dinosaur.name.upper()}\n")
-        print(f"I'll put $100 that Robot {self.robot.name} will handle this easily!")
-        print(" ")
+        print(f"\n                    BATTLE\n         Robot: {self.robot.name.upper()}  vs  Dino: {self.dinosaur.name.upper()}\n")
+        print(f"I'll put $100 that Robot {self.robot.name} will handle this easily!\n")
     
     def battle_phase(self):
         while self.battle == True:
             if self.robot.health > 0:
                 self.dinosaur.attack(self.robot.name)
                 self.robot.health = self.robot.health - self.dinosaur.attack_power
-                print(f'Robot {self.robot.name} has {self.robot.health} health remaining!\n')
                 if self.robot.health <= 0:
+                    print(f"Robot {self.robot.name} is down!\n")
                     break
             if self.dinosaur.health > 0:
-                self.robot.attack(self.dinosaur.name)
+                self.robot.choose_weapon(self.dinosaur)
+                self.robot.attack(self.dinosaur)
                 self.dinosaur.health = self.dinosaur.health - self.robot.active_weapon.attack_power
-                print(f'Dinosaur {self.dinosaur.name} has {self.dinosaur.health} health remaining!\n')
                 if self.dinosaur.health <= 0:
+                    print(f"Dino {self.dinosaur.name} is smashed!\n")
                     break
             else:
                 self.battle = False
@@ -128,12 +126,18 @@ class Battlefield:
     def display_winner(self):
             if self.robot.health <= 0:
                 print(f"Dino {self.dinosaur.name} wins!\n")
+                print(f'It was an epic battle, which defined Robot {self.robot.name} as a looser... Oh, my bad. Defined him as DEAD Robot {self.robot.name}!\n')
             elif self.dinosaur.health <= 0:
                 print(f"Robot {self.robot.name} wins! Nothing unpredictable.\n")
+                print(f'Like I said, Dino {self.dinosaur.name} is an easy opponent for Robot {self.robot.name}. By the way, where is my winning bet?!\n')
 
     def fleet_herd_final_display(self):
         print("\nToday's battle was just a one of many in this EPIC WAR!\nThis war is far from the over!\n\nThanks for being with us!\n")
+    
+    def create_robot(self):
+        self.robot = Robot(input("\nEnter Robot name: "), Weapon(("Knife"), 15))
+        return self.robot
 
-weapon1 = Weapon('Cannon', 30)
-weapon2 = Weapon('Blaster', 20)
-weapon3 = Weapon('Sabre', 35)
+    def create_dinosaur(self):
+        self.dinosaur = Dinosaur(input("Enter Dino name: "), 25)
+        return self.dinosaur
