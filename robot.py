@@ -5,7 +5,6 @@ class Robot:
         self.name = name
         self.health = 100
         self.active_weapon = Weapon('Cannon', 30)
-        self.fleet = []
     
     def attack(self, dinosaur):
         print(f"                    Available weapon for Robot {self.name}\n")

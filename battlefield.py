@@ -9,23 +9,32 @@ class Battlefield:
     def run_games(self):
         user_choice = self.game_mode()
         if user_choice == '1':
+            self.robot_dino_names()
             self.display_welcome()
             self.battle_phase()
             self.display_winner()
         elif user_choice == '2':
             self.create_fleet()
             self.create_herd()
+            self.round_one()
+            self.round_two()
+            self.round_three()
+            self.fleet_herd_final_display()
 
     def game_mode(self):
         print("                     GAME MODE:")
         user_choice = input("1. Robot vs Dinosaur            2. Fleet vs Nerd \n     \nSelect option: ")
-        return user_choice     
+        return user_choice  
+
+    def robot_dino_names(self):
+        self.robot = Robot(input("Enter Robot name: "))
+        self.dinosaur = Dinosaur(input("Enter Dino name: "), 25)  
 
     def create_fleet(self):
         self.robot1 = Robot(input("First Robot name: "))
         self.robot2 = Robot(input("Second Robot name: "))
         self.robot3 = Robot(input("Third Robot name: "))
-        print(f"\nFleet squad is:\n\n1. Robot {self.robot1.name} weapon: {weapon1.name} - damage: {weapon1.attack_power}\n2. Robot {self.robot2.name} weapon: {weapon2.name} - damage: {weapon2.attack_power}\n3. Robot {self.robot3.name} weapon: {weapon3.name} - damage: {weapon3.attack_power}\n\nNice choice!\n")
+        print(f"\nFleet squad is:\n\n1. Robot {self.robot1.name}\n2. Robot {self.robot2.name}\n3. Robot {self.robot3.name}\n\nNice choice!\n")
 
     def create_herd(self):
         self.dinosaur1 = Dinosaur(input("First Dino name: "), 25)
@@ -35,45 +44,96 @@ class Battlefield:
 
     def display_welcome(self):
         print(" ")
-        print("This battle will be epic! Are you ready to make a bet?")
-        print(f"I'll put $100 that Robot {robot.name} will handle this easily!")
+        print(f"                    BATTLE\n         Robot: {self.robot.name.upper()}  vs  Dino: {self.dinosaur.name.upper()}\n")
+        print(f"I'll put $100 that Robot {self.robot.name} will handle this easily!")
         print(" ")
     
     def battle_phase(self):
         while self.battle == True:
-            if robot.health > 0:
-                dinosaur.attack(robot.name)
-                robot.health = robot.health - dinosaur.attack_power
-                print(f'Robot {robot.name} has {robot.health} health remaining!')
-                print(" ")
-                if robot.health <= 0:
+            if self.robot.health > 0:
+                self.dinosaur.attack(self.robot.name)
+                self.robot.health = self.robot.health - self.dinosaur.attack_power
+                print(f'Robot {self.robot.name} has {self.robot.health} health remaining!\n')
+                if self.robot.health <= 0:
                     break
-            if dinosaur.health > 0:
-                robot.attack(dinosaur.name)
-                dinosaur.health = dinosaur.health - robot.active_weapon.attack_power
-                print(f'Dinosaur {dinosaur.name} has {dinosaur.health} health remaining!')
-                print(" ")
-                if dinosaur.health <= 0:
+            if self.dinosaur.health > 0:
+                self.robot.attack(self.dinosaur.name)
+                self.dinosaur.health = self.dinosaur.health - self.robot.active_weapon.attack_power
+                print(f'Dinosaur {self.dinosaur.name} has {self.dinosaur.health} health remaining!\n')
+                if self.dinosaur.health <= 0:
                     break
             else:
                 self.battle = False
 
-    def fleet_vs_herd_battle(self):
-        while self.battle == True:
-            pass
-                
+    def round_one(self):
+        self.battle_one = True
+        print(f"                    ROUND 1\n                 {self.robot1.name.upper()} vs {self.dinosaur1.name.upper()}\n")
+        while self.battle_one == True:
+            self.dinosaur1.attack(self.robot1.name)
+            self.robot1.health = self.robot1.health - self.dinosaur1.attack_power
+            if self.robot1.health > 0:
+                print(f'Robot {self.robot1.name} has {self.robot1.health} health remaining!\n')
+            if self.robot1.health <= 0:
+                print(f"\nRobot {self.robot1.name} is killed!\n")
+                break
+            if self.dinosaur1.health > 0:
+                self.robot1.attack(self.dinosaur1.name)
+                self.dinosaur1.health = self.dinosaur1.health - self.robot1.active_weapon.attack_power
+                if self.dinosaur1.health > 0:
+                    print(f'Dino {self.dinosaur1.name} has {self.dinosaur1.health} health remaining!\n')
+                if self.dinosaur1.health <= 0:
+                    print(f"\nDino {self.dinosaur1.name} is killed!\n")
+                    break
+
+    def round_two(self):
+        self.battle_two = True
+        print(f"                    ROUND 2\n                 {self.robot2.name.upper()} vs {self.dinosaur2.name.upper()}\n")
+        while self.battle_two == True:
+            self.dinosaur2.attack(self.robot2.name)
+            self.robot2.health = self.robot2.health - self.dinosaur2.attack_power
+            if self.robot2.health > 0:
+                print(f'Robot {self.robot2.name} has {self.robot2.health} health remaining!\n')
+            if self.robot2.health <= 0:
+                print(f"\nRobot {self.robot2.name} is killed!\n")
+                break
+            if self.dinosaur2.health > 0:
+                self.robot2.attack(self.dinosaur2.name)
+                self.dinosaur2.health = self.dinosaur2.health - self.robot2.active_weapon.attack_power
+                if self.dinosaur2.health > 0:
+                    print(f'Dino {self.dinosaur2.name} has {self.dinosaur2.health} health remaining!\n')
+                if self.dinosaur2.health <= 0:
+                    print(f"\nDino {self.dinosaur2.name} is killed!\n")
+                    break
+
+    def round_three(self):
+        self.battle_three = True
+        print(f"                    ROUND 3\n                 {self.robot3.name.upper()} vs {self.dinosaur3.name.upper()}\n")
+        while self.battle_three == True:
+            self.dinosaur3.attack(self.robot3.name)
+            self.robot3.health = self.robot3.health - self.dinosaur3.attack_power
+            if self.robot3.health > 0:
+                print(f'Robot {self.robot3.name} has {self.robot3.health} health remaining!\n')
+            if self.robot3.health <= 0:
+                print(f"\nRobot {self.robot3.name} is killed!\n")
+                break
+            if self.dinosaur3.health > 0:
+                self.robot3.attack(self.dinosaur3.name)
+                self.dinosaur3.health = self.dinosaur3.health - self.robot3.active_weapon.attack_power
+                if self.dinosaur3.health > 0:
+                    print(f'Dino {self.dinosaur3.name} has {self.dinosaur3.health} health remaining!\n')
+                if self.dinosaur3.health <= 0:
+                    print(f"\nDino {self.dinosaur3.name} is killed!\n")
+                    break
 
     def display_winner(self):
-            if robot.health <= 0:
-                print(f"{dinosaur.name} wins!")
-                print(" ")
-            elif dinosaur.health <= 0:
-                print(f"{robot.name} wins! Nothing unpredictable.")
-                print(" ")
+            if self.robot.health <= 0:
+                print(f"Dino {self.dinosaur.name} wins!\n")
+            elif self.dinosaur.health <= 0:
+                print(f"Robot {self.robot.name} wins! Nothing unpredictable.\n")
 
-dinosaur = Dinosaur('Arghhh', 25)
-robot = Robot('TasteOfSteel')
+    def fleet_herd_final_display(self):
+        print("\nToday's battle was just a one of many in this EPIC WAR!\nThis war is far from the over!\n\nThanks for being with us!\n")
+
 weapon1 = Weapon('Cannon', 30)
 weapon2 = Weapon('Blaster', 20)
 weapon3 = Weapon('Sabre', 35)
-
