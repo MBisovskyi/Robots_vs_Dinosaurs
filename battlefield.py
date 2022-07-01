@@ -4,9 +4,7 @@ from weapon import Weapon
 
 class Battlefield:
     def __init__(self):
-        self.action = True
-        self.fleet = []
-        self.herd = []
+        self.battle = True
 
     def run_games(self):
         user_choice = self.game_mode()
@@ -24,22 +22,16 @@ class Battlefield:
         return user_choice     
 
     def create_fleet(self):
-        robot1 = Robot(input("First Robot name: "))
-        self.fleet.append(robot1.name)
-        robot2 = Robot(input("Second Robot name: "))
-        self.fleet.append(robot2.name)
-        robot3 = Robot(input("Third Robot name: "))
-        self.fleet.append(robot3.name)
-        print(f"\nFleet squad is:\n\n1. Robot {self.fleet[0]} weapon: {weapon1.name} - damage: {weapon1.attack_power}\n2. Robot {self.fleet[1]} weapon: {weapon2.name} - damage: {weapon2.attack_power}\n3. Robot {self.fleet[2]} weapon: {weapon3.name} - damage: {weapon3.attack_power}\n\nNice choice!\n")
+        self.robot1 = Robot(input("First Robot name: "))
+        self.robot2 = Robot(input("Second Robot name: "))
+        self.robot3 = Robot(input("Third Robot name: "))
+        print(f"\nFleet squad is:\n\n1. Robot {self.robot1.name} weapon: {weapon1.name} - damage: {weapon1.attack_power}\n2. Robot {self.robot2.name} weapon: {weapon2.name} - damage: {weapon2.attack_power}\n3. Robot {self.robot3.name} weapon: {weapon3.name} - damage: {weapon3.attack_power}\n\nNice choice!\n")
 
     def create_herd(self):
-        dinosaur1 = Dinosaur(input("First Dino name: "), 25)
-        self.herd.append(dinosaur1.name)
-        dinosaur2 = Dinosaur(input("Second Dino name: "), 27)
-        self.herd.append(dinosaur2.name)
-        dinosaur3 = Dinosaur(input("Third Dino name: "), 22)
-        self.herd.append(dinosaur3.name)
-        print(f"\nHerd squad is:\n\n1. Dino {self.herd[0]} - damage: {dinosaur1.attack_power}\n2. Dino {self.herd[1]} - damage: {dinosaur2.attack_power}\n3. Dino {self.herd[2]} - damage: {dinosaur3.attack_power}\n\nThey are huge!\n")
+        self.dinosaur1 = Dinosaur(input("First Dino name: "), 25)
+        self.dinosaur2 = Dinosaur(input("Second Dino name: "), 27)
+        self.dinosaur3 = Dinosaur(input("Third Dino name: "), 22)
+        print(f"\nHerd squad is:\n\n1. Dino {self.dinosaur1.name} - damage: {self.dinosaur1.attack_power}\n2. Dino {self.dinosaur2.name} - damage: {self.dinosaur2.attack_power}\n3. Dino {self.dinosaur3.name} - damage: {self.dinosaur3.attack_power}\n\nThey are huge!\n")
 
     def display_welcome(self):
         print(" ")
@@ -48,7 +40,7 @@ class Battlefield:
         print(" ")
     
     def battle_phase(self):
-        while self.action == True:
+        while self.battle == True:
             if robot.health > 0:
                 dinosaur.attack(robot.name)
                 robot.health = robot.health - dinosaur.attack_power
@@ -64,7 +56,12 @@ class Battlefield:
                 if dinosaur.health <= 0:
                     break
             else:
-                self.action = False
+                self.battle = False
+
+    def fleet_vs_herd_battle(self):
+        while self.battle == True:
+            pass
+                
 
     def display_winner(self):
             if robot.health <= 0:
@@ -73,7 +70,6 @@ class Battlefield:
             elif dinosaur.health <= 0:
                 print(f"{robot.name} wins! Nothing unpredictable.")
                 print(" ")
-        
 
 dinosaur = Dinosaur('Arghhh', 25)
 robot = Robot('TasteOfSteel')
