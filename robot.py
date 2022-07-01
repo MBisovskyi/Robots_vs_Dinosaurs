@@ -20,7 +20,7 @@ class Robot:
             self.active_weapon = sabre
         print(" ")
         print(f'Robot {self.name} attacked Dinosaur {dinosaur} with a {self.active_weapon.name} and dealt {self.active_weapon.attack_power} of damage!') 
-        
+
 cannon = Weapon('Cannon', 30)
 blaster = Weapon('Blaster', 20)
 sabre = Weapon('Sabre', 35)

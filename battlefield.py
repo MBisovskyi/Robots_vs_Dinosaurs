@@ -1,5 +1,6 @@
 from robot import Robot
 from dinosaur import Dinosaur
+from weapon import Weapon
 
 class Battlefield:
     def __init__(self):
@@ -29,18 +30,16 @@ class Battlefield:
         self.fleet.append(robot2.name)
         robot3 = Robot(input("Third Robot name: "))
         self.fleet.append(robot3.name)
-        print(f"\nFleet squad is:\n\n1. Robot {self.fleet[0]}\n2. Robot {self.fleet[1]}\n3. Robot {self.fleet[2]}\n\nNice choice!\n")
-        
+        print(f"\nFleet squad is:\n\n1. Robot {self.fleet[0]} weapon: {weapon1.name} - damage: {weapon1.attack_power}\n2. Robot {self.fleet[1]} weapon: {weapon2.name} - damage: {weapon2.attack_power}\n3. Robot {self.fleet[2]} weapon: {weapon3.name} - damage: {weapon3.attack_power}\n\nNice choice!\n")
 
     def create_herd(self):
         dinosaur1 = Dinosaur(input("First Dino name: "), 25)
         self.herd.append(dinosaur1.name)
-        dinosaur2 = Dinosaur(input("Second Dino name: "), 25)
+        dinosaur2 = Dinosaur(input("Second Dino name: "), 27)
         self.herd.append(dinosaur2.name)
-        dinosaur3 = Dinosaur(input("Third Dino name: "), 25)
+        dinosaur3 = Dinosaur(input("Third Dino name: "), 22)
         self.herd.append(dinosaur3.name)
-        print(f"\nHerd squad is:\n\n1. Dino {self.herd[0]}\n2. Dino {self.herd[1]}\n3. Dino {self.herd[2]}\n\nThey are huge!\n")
-
+        print(f"\nHerd squad is:\n\n1. Dino {self.herd[0]} - damage: {dinosaur1.attack_power}\n2. Dino {self.herd[1]} - damage: {dinosaur2.attack_power}\n3. Dino {self.herd[2]} - damage: {dinosaur3.attack_power}\n\nThey are huge!\n")
 
     def display_welcome(self):
         print(" ")
@@ -78,4 +77,7 @@ class Battlefield:
 
 dinosaur = Dinosaur('Arghhh', 25)
 robot = Robot('TasteOfSteel')
+weapon1 = Weapon('Cannon', 30)
+weapon2 = Weapon('Blaster', 20)
+weapon3 = Weapon('Sabre', 35)
 
