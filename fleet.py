@@ -15,7 +15,7 @@ class Fleet:
         while robots_counter != 3:
             self.robot = Robot(input('Enter robot name: '), 15)
             self.robot.active_weapon = self.choose_weapon()
-            self.fleet.append(self.robot.name)
+            self.fleet.append(self.robot)
             robots_counter += 1
 
     def choose_weapon(self):
@@ -23,19 +23,23 @@ class Fleet:
         print(f'1. {self.weapons[0].name}    2. {self.weapons[1].name}    3. {self.weapons[2].name}    4. {self.weapons[3].name}\n')
         print(f'If you select a wrong option - robot will not get any weapon!\n')
         weapon_input = input('Please, select weapon: ')
-        print()
         if weapon_input == '1':
             self.robot.active_weapon = self.weapons[0]
+            print(f"Robot {self.robot.name} is choosing {self.robot.active_weapon.name}!\n")
             return self.robot.active_weapon
         if weapon_input == '2':
             self.robot.active_weapon = self.weapons[1]
+            print(f"Robot {self.robot.name} is choosing {self.robot.active_weapon.name}!\n")
             return self.robot.active_weapon
         if weapon_input == '3':
             self.robot.active_weapon = self.weapons[2]
+            print(f"Robot {self.robot.name} is choosing {self.robot.active_weapon.name}!\n")
             return self.robot.active_weapon
         if weapon_input == '4':
             self.robot.active_weapon = self.weapons[3]
+            print(f"Robot {self.robot.name} is choosing {self.robot.active_weapon.name}!\n")
             return self.robot.active_weapon
         else:
-            self.robot.active_weapon = Weapon('Feast', 15)
+            self.robot.active_weapon = Weapon('feasts', 15)
+            print(f"Robot {self.robot.name} didn't want to get a weapon. It's going to fight with {self.robot.active_weapon.name}!\n")
             return self.robot.active_weapon

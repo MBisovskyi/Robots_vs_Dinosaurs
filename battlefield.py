@@ -1,3 +1,4 @@
+from logging import root
 from robot import Robot
 from dinosaur import Dinosaur
 from fleet import Fleet
@@ -9,7 +10,7 @@ class Battlefield:
         self.dinosaur = None
         self.robot = None
         self.fleet = Fleet()
-        self.herd = []
+        self.herd = Herd()
 
     def run_games(self):
         user_choice = self.game_mode()
@@ -17,6 +18,7 @@ class Battlefield:
             self.robot_dinosaur()
         elif user_choice == '2':
             self.fleet_herd()
+
 
     def game_mode(self):
         print("                     GAME MODE:")
@@ -70,3 +72,12 @@ class Battlefield:
     
     def fleet_herd(self):
         self.fleet.create_fleet()
+        self.herd.create_herd()
+        print(self.fleet.fleet[0].active_weapon.attack_power)
+        self.fleet_herd_battle()
+
+    def fleet_herd_battle(self):
+        print(f"                Battle begins!\nAs robots had a chance to pick a weapon for themselves, I think it'll be fair enough if {self.herd.herd[0].name}, {self.herd.herd[1].name} and {self.herd.herd[2].name} attack first!\n")
+        while self.battle == True:
+            if self.fleet.fleet[0].health > 0:
+                pass
