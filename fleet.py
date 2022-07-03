@@ -3,8 +3,8 @@ from weapon import Weapon
 
 class Fleet:
     def __init__(self):
-        self.fleet = []
-        self.weapons = [Weapon('Cannon', 25), Weapon('Blaster', 20), Weapon('Sabre', 35), Weapon('Laser Gun', 30)]
+        self.robots_list = []
+        self.weapons = [Weapon('Cannon', 25), Weapon('Blaster', 22), Weapon('Sabre', 33), Weapon('Laser Gun', 30)]
 
     def create_fleet(self):
         self.create_robot()
@@ -14,11 +14,11 @@ class Fleet:
         robots_counter = 0
         while robots_counter != 3:
             self.robot = Robot(input('Enter robot name: '), 15)
-            self.robot.active_weapon = self.choose_weapon()
-            self.fleet.append(self.robot)
+            self.robot.active_weapon = self.fleet_weapon()
+            self.robots_list.append(self.robot)
             robots_counter += 1
 
-    def choose_weapon(self):
+    def fleet_weapon(self):
         print('\n                     Choose a weapon:')
         print(f'1. {self.weapons[0].name}    2. {self.weapons[1].name}    3. {self.weapons[2].name}    4. {self.weapons[3].name}\n')
         print(f'If you select a wrong option - robot will not get any weapon!\n')
